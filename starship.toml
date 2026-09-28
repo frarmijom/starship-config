@@ -1,0 +1,57 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$line_break\
+$character"""
+
+add_newline = false
+
+# ─────────────────────────────────────────────
+# IDENTIDAD: 👽 [user:host]
+# ─────────────────────────────────────────────
+
+[username]
+show_always = true
+format = "👽 [\\[](#7F849C)[$user]($style)[:](#7F849C)"
+style_user = "bold #FF6B6B"
+style_root = "bold #FF3B30"
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)[\\]](#7F849C) "
+style = "bold #C792EA"
+
+# ─────────────────────────────────────────────
+# DIRECTORIO / REPOSITORIO
+# ─────────────────────────────────────────────
+
+[directory]
+truncation_length = 2
+truncate_to_repo = true
+format = "[$path]($style) "
+style = "bold #2DE2E6"
+
+# ─────────────────────────────────────────────
+# GIT
+# ─────────────────────────────────────────────
+
+[git_branch]
+symbol = " "
+format = "[$symbol](#7F849C)[$branch]($style) "
+style = "bold #FFD166"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style)"
+style = "#FF9F43"
+
+# ─────────────────────────────────────────────
+# PROMPT
+# ─────────────────────────────────────────────
+
+[character]
+success_symbol = "[❯](bold #7DFF8A)"
+error_symbol = "[❯](bold #FF5370)"

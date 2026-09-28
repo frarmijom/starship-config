@@ -1,0 +1,12 @@
+# Backups
+*.backup
+*.backup.*
+
+# Editor temporary files
+*~
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+Thumbs.db
