@@ -5,6 +5,7 @@ $directory\
 $git_branch\
 $git_status\
 $git_state\
+$fill\
 $time\
 $line_break\
 $character"""
@@ -64,5 +65,8 @@ error_symbol = "[❯](bold #FF5370)"
 [time]
 disabled = false
 time_format = "%Y-%m-%d %H:%M:%S"
-format = " [🕒 $time]($style)"
+format = "[🕒 $time]($style)"
 style = "bold #7F849C"
+
+[fill]
+symbol = " "
