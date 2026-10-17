@@ -5,11 +5,12 @@ Configuración personalizada de Starship para Bash, diseñada para proporcionar 
 ## Vista del prompt
 
 ```text
-👽 [farmijo:infra-core01] heater-repair-workshop-frontend  feature/hito-03-ui-design !? 🕒 2026-10-17 10:44:35
+👽 [farmijo:infra-core01] heater-repair-workshop-frontend  feature/hito-03-ui-design !?                      🕒 2026-10-17 10:44:35
 ❯
 ```
 
 La primera línea entrega el contexto de la sesión y del repositorio.  
+La fecha y hora se alinean al borde derecho de la primera línea mediante el módulo `fill`, independientemente de la longitud del directorio. En terminales muy estrechas el resultado puede ajustarse según el espacio disponible.  
 La segunda línea queda libre para escribir comandos.
 
 ## Estructura
