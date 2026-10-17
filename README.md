@@ -5,7 +5,7 @@ Configuración personalizada de Starship para Bash, diseñada para proporcionar 
 ## Vista del prompt
 
 ```text
-👽 [farmijo:infra-core01] heater-repair-workshop-frontend  feature/hito-03-ui-design !?
+👽 [farmijo:infra-core01] heater-repair-workshop-frontend  feature/hito-03-ui-design !? 🕒 2026-10-17 10:44:35
 ❯
 ```
 
@@ -26,7 +26,8 @@ El prompt muestra:
 - directorio o repositorio actual;
 - branch Git activa;
 - estado del repositorio;
-- resultado del último comando.
+- resultado del último comando;
+- fecha y hora local al mostrarse el prompt (normalmente al finalizar el comando anterior).
 
 El usuario y el hostname son obtenidos dinámicamente por Starship, por lo que la configuración puede reutilizarse en distintos equipos.
 
