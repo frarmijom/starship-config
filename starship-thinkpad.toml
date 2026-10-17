@@ -1,0 +1,72 @@
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$fill\
+$time\
+$line_break\
+$character"""
+
+add_newline = false
+
+# ─────────────────────────────────────────────
+# IDENTIDAD THINKPAD: 💀 [user:host]
+# ─────────────────────────────────────────────
+
+[username]
+show_always = true
+format = "💀 [\\[](#78909C)[$user]($style)[:](#78909C)"
+style_user = "bold #82AAFF"
+style_root = "bold #FF3B30"
+
+[hostname]
+ssh_only = false
+format = "[THINKPAD]($style)[\\]](#7F849C) "
+style = "bold #89DDFF"
+
+# ─────────────────────────────────────────────
+# DIRECTORIO / REPOSITORIO
+# ─────────────────────────────────────────────
+
+[directory]
+truncation_length = 2
+truncate_to_repo = true
+format = "[$path]($style) "
+style = "bold #00D9FF"
+
+# ─────────────────────────────────────────────
+# GIT
+# ─────────────────────────────────────────────
+
+[git_branch]
+symbol = " "
+format = "[$symbol](#78909C)[$branch]($style) "
+style = "bold #C3E88D"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style)"
+style = "#F78C6C"
+
+# ─────────────────────────────────────────────
+# PROMPT
+# ─────────────────────────────────────────────
+
+[character]
+success_symbol = "[❯](bold #89DDFF)"
+error_symbol = "[❯](bold #FF5370)"
+
+# ─────────────────────────────────────────────
+# FECHA Y HORA (hora local al mostrar el prompt)
+# ─────────────────────────────────────────────
+
+[time]
+disabled = false
+time_format = "%Y-%m-%d %H:%M:%S"
+format = "[🕒 $time]($style)"
+style = "bold #78909C"
+
+[fill]
+symbol = " "
