@@ -30,4 +30,4 @@ Si se añadió una línea de carga a `~/.bashrc`, puedes retirarla manualmente. 
 
 ## Dependencias entre PR
 
-Este desarrollo parte del branch de perfiles del PR #1. Los aliases del PR #2 están en otro branch y, por tanto, no se instalan en esta versión hasta que se integren al branch final.
+Los PR #1, #2 y #3 están fusionados en `main`. `bash/load.sh` ahora está disponible. Instala desde un clon permanente, no desde `/tmp`, para que el cargador de aliases en `~/.bashrc` siga disponible.
