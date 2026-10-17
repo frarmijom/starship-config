@@ -1,0 +1,10 @@
+# Atajos Git: operaciones destructivas deliberadamente excluidas.
+alias gs='git status --short --branch'
+alias gb='git branch -vv'
+alias ga='git add'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gl='git log --oneline --graph --decorate -15'
+alias gf='git fetch --prune'
+alias gpr='git pull --rebase'
+alias gsh='git show --stat'
