@@ -1,0 +1,11 @@
+# Atajos Docker: no incluyen eliminación de imágenes ni volúmenes.
+alias dps='docker ps'
+alias dpa='docker ps -a'
+alias di='docker images'
+alias dst='docker stats'
+alias dlog='docker logs --tail 100 -f'
+alias dex='docker exec -it'
+alias dc='docker compose'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dcl='docker compose logs -f --tail 100'
