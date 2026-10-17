@@ -1,15 +1,35 @@
-# 👽 INFRA Starship
+# Starship — INFRA-CORE01 y ThinkPad
 
-Configuración personalizada de Starship para Bash, diseñada para proporcionar contexto útil de sistema y Git sin consumir espacio innecesario en la línea de comandos.
+Configuraciones personalizadas de Starship para Bash, diseñada para proporcionar contexto útil de sistema y Git sin consumir espacio innecesario en la línea de comandos.
+
+## Perfiles
+
+- `starship.toml`: INFRA-CORE01, identidad 👽 y paleta original.
+- `starship-thinkpad.toml`: ThinkPad, identidad 💀, hostname `THINKPAD` y paleta azul/cian original.
+
+Ambos perfiles muestran fecha y hora local alineadas a la derecha usando `$fill` y `$time`. La hora corresponde a la presentación del prompt, no al inicio exacto del comando.
+
+**Importante:** `install.sh` instala por defecto el perfil INFRA; no lo uses para aplicar el perfil ThinkPad.
+
+Para probar el perfil ThinkPad sin modificar `main`:
+
+```bash
+curl -fLsS https://raw.githubusercontent.com/frarmijom/starship-config/feature/starship-prompt-date-time/starship-thinkpad.toml -o /tmp/starship-thinkpad-pr1.toml
+STARSHIP_CONFIG=/tmp/starship-thinkpad-pr1.toml starship explain
+cp ~/.config/starship.toml ~/.config/starship.toml.backup-$(date +%Y%m%d-%H%M%S)
+cp /tmp/starship-thinkpad-pr1.toml ~/.config/starship.toml
+exec bash
+```
 
 ## Vista del prompt
 
 ```text
-👽 [farmijo:infra-core01] heater-repair-workshop-frontend  feature/hito-03-ui-design !?
+👽 [farmijo:infra-core01] heater-repair-workshop-frontend  feature/hito-03-ui-design !?                      🕒 2026-10-17 10:44:35
 ❯
 ```
 
 La primera línea entrega el contexto de la sesión y del repositorio.  
+La fecha y hora se alinean al borde derecho de la primera línea mediante el módulo `fill`, independientemente de la longitud del directorio. En terminales muy estrechas el resultado puede ajustarse según el espacio disponible.  
 La segunda línea queda libre para escribir comandos.
 
 ## Estructura
@@ -26,7 +46,8 @@ El prompt muestra:
 - directorio o repositorio actual;
 - branch Git activa;
 - estado del repositorio;
-- resultado del último comando.
+- resultado del último comando;
+- fecha y hora local al mostrarse el prompt (normalmente al finalizar el comando anterior).
 
 El usuario y el hostname son obtenidos dinámicamente por Starship, por lo que la configuración puede reutilizarse en distintos equipos.
 
@@ -39,7 +60,7 @@ Por ejemplo:
 En otro host:
 
 ```text
-👽 [farmijo:thinkpad] ...
+💀 [farmijo:THINKPAD] ...
 ```
 
 ## Paleta
@@ -103,6 +124,7 @@ infra-starship/
 ├── .gitignore
 ├── README.md
 ├── install.sh
+├── starship-thinkpad.toml
 └── starship.toml
 ```
 

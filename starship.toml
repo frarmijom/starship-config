@@ -5,6 +5,8 @@ $directory\
 $git_branch\
 $git_status\
 $git_state\
+$fill\
+$time\
 $line_break\
 $character"""
 
@@ -22,7 +24,7 @@ style_root = "bold #FF3B30"
 
 [hostname]
 ssh_only = false
-format = "[$hostname]($style)[\\]](#7F849C) "
+format = "[INFRA-CORE01]($style)[\\]](#7F849C) "
 style = "bold #C792EA"
 
 # ─────────────────────────────────────────────
@@ -55,3 +57,16 @@ style = "#FF9F43"
 [character]
 success_symbol = "[❯](bold #7DFF8A)"
 error_symbol = "[❯](bold #FF5370)"
+
+# ─────────────────────────────────────────────
+# FECHA Y HORA (hora local al mostrar el prompt)
+# ─────────────────────────────────────────────
+
+[time]
+disabled = false
+time_format = "%Y-%m-%d %H:%M:%S"
+format = "[🕒 $time]($style)"
+style = "bold #7F849C"
+
+[fill]
+symbol = " "
