@@ -24,7 +24,7 @@ style_root = "bold #FF3B30"
 
 [hostname]
 ssh_only = false
-format = "[$hostname]($style)[\\]](#7F849C) "
+format = "[INFRA-CORE01]($style)[\\]](#7F849C) "
 style = "bold #C792EA"
 
 # ─────────────────────────────────────────────
