@@ -48,16 +48,16 @@ mkdir -p ~/.config/git
 El helper `git-credential-libsecret` debe existir en este equipo y GNOME Keyring debe estar disponible. En el perfil FJK, configurar la ruta real del helper sin guardar secretos en el repositorio:
 
 ```bash
-git config --file "$GIT_CONFIG_GLOBAL" \\
-  'credential.https://git.fjk.internal.helper' \\
+git config --file "$GIT_CONFIG_GLOBAL" \
+  'credential.https://git.fjk.internal.helper' \
   "$HOME/.local/libexec/git-credential-libsecret"
 ```
 
 Validación de solo lectura:
 
 ```bash
-printf 'Entorno=%s\\nGit=%s\\n' "$WORK_ENV" "$GIT_CONFIG_GLOBAL"
-GIT_TERMINAL_PROMPT=0 git ls-remote \\
+printf 'Entorno=%s\nGit=%s\n' "$WORK_ENV" "$GIT_CONFIG_GLOBAL"
+GIT_TERMINAL_PROMPT=0 git ls-remote \
   https://git.fjk.internal/hrw/fjk-platform-jenkins.git HEAD
 ```
 
