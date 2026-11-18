@@ -1,6 +1,7 @@
 format = """
 $username\
 $hostname\
+${custom.work_env}\
 $directory\
 $git_branch\
 $git_status\
@@ -70,3 +71,11 @@ style = "bold #78909C"
 
 [fill]
 symbol = " "
+
+# Contexto del perfil GNOME Terminal (LOCAL / FJK)
+# WORK_ENV se define al iniciar Bash en el perfil seleccionado.
+[custom.work_env]
+when = 'test -n "$WORK_ENV"'
+command = 'printf "%s" "$WORK_ENV" | tr "[:lower:]" "[:upper:]"'
+format = '[\[$output\]]($style) '
+style = 'bold #C3E88D'
