@@ -31,3 +31,16 @@ Si se añadió una línea de carga a `~/.bashrc`, puedes retirarla manualmente. 
 ## Dependencias entre PR
 
 Los PR #1, #2 y #3 están fusionados en `main`. `bash/load.sh` ahora está disponible. Instala desde un clon permanente, no desde `/tmp`, para que el cargador de aliases en `~/.bashrc` siga disponible.
+
+## GNOME Terminal: perfiles de trabajo LOCAL / FJK
+
+En el ThinkPad los perfiles de trabajo son distintos de los perfiles de **equipo** que selecciona `install.sh`.
+
+Consulta [gnome-terminal/README.md](gnome-terminal/README.md) para la instalación de los archivos `local.bashrc` y `fjk.bashrc`, la selección del perfil desde la aplicación y la configuración Git de Forgejo. Desde la raíz del clon:
+
+```bash
+bash gnome-terminal/install.sh --dry-run
+bash gnome-terminal/install.sh --apply
+```
+
+Este instalador preserva `~/.bashrc`, los perfiles gráficos y las credenciales. El tema Starship `starship-thinkpad.toml` reconoce `WORK_ENV` y etiqueta el prompt.

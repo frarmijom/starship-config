@@ -1,0 +1,13 @@
+# Ejemplo sin secretos. Instalar como ~/.config/git/fjk.gitconfig.
+# El helper de Forgejo se configura después, usando la ruta real del equipo.
+[include]
+    path = ~/.gitconfig
+
+[init]
+    defaultBranch = main
+
+[core]
+    editor = code --wait
+
+[credential "https://git.fjk.internal"]
+    useHttpPath = true

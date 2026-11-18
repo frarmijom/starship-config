@@ -10,3 +10,12 @@
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Las configuraciones Git locales pueden contener rutas o datos personales.
+# Publicar solo plantillas explícitas *.example.
+git/*.gitconfig
+
+# Credenciales nunca deben versionarse
+*.credential
+*.credentials
+*.token
