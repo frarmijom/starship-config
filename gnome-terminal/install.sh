@@ -7,16 +7,16 @@ MODE="${1:---dry-run}"
 
 case "$MODE" in
     --dry-run|--apply) ;;
-    *) printf 'Uso: %s [--dry-run|--apply]\\n' "$0" >&2; exit 2 ;;
+    *) printf 'Uso: %s [--dry-run|--apply]\n' "$0" >&2; exit 2 ;;
 esac
 
 for name in fjk local; do
     test -r "$ROOT/profiles/$name.bashrc" || { echo "Falta $name.bashrc" >&2; exit 1; }
 done
 
-printf 'Destino: %s\\n' "$DEST"
+printf 'Destino: %s\n' "$DEST"
 for name in fjk local; do
-    printf '  %s.bashrc <- %s\\n' "$name" "$ROOT/profiles/$name.bashrc"
+    printf '  %s.bashrc <- %s\n' "$name" "$ROOT/profiles/$name.bashrc"
 done
 
 if [[ "$MODE" == "--dry-run" ]]; then
@@ -30,16 +30,14 @@ for name in fjk local; do
     if [[ -f "$target" ]]; then
         backup="$target.backup-$(date +%Y%m%d-%H%M%S)-$$"
         cp -p -- "$target" "$backup"
-        printf 'Respaldo: %s\\n' "$backup"
+        printf 'Respaldo: %s\n' "$backup"
     fi
     install -m 0644 "$ROOT/profiles/$name.bashrc" "$target"
 done
 
-cat <<'MESSAGE'
-Archivos instalados. Conservamos los perfiles gráficos existentes.
-En GNOME Terminal > Preferencias > perfil > Comando:
-  FJK:   /bin/bash --rcfile /home/farmijo/.config/gnome-terminal/profiles/fjk.bashrc -i
-  LOCAL: /bin/bash --rcfile /home/farmijo/.config/gnome-terminal/profiles/local.bashrc -i
-Activa «Ejecutar un comando personalizado», desactiva «shell de inicio de sesión»
-y abre una nueva pestaña con cada perfil para comprobar las variables.
-MESSAGE
+echo 'Archivos instalados. Conservamos los perfiles gráficos existentes.'
+echo 'En GNOME Terminal > Preferencias > perfil > Comando:'
+printf '  FJK:   /bin/bash --rcfile %s/fjk.bashrc -i\n' "$DEST"
+printf '  LOCAL: /bin/bash --rcfile %s/local.bashrc -i\n' "$DEST"
+echo 'Activa «Ejecutar un comando personalizado», desactiva «shell de inicio de sesión»'
+echo 'y abre una nueva pestaña con cada perfil para comprobar las variables.'
