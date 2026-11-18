@@ -13,6 +13,24 @@ La configuración de cada equipo se mantiene independiente. Ambos perfiles utili
 
 Los nombres en mayúsculas son etiquetas visuales estáticas de cada perfil; no renombran el hostname Linux.
 
+## Entornos LOCAL y FJK en GNOME Terminal (ThinkPad)
+
+El ThinkPad también admite dos perfiles de **GNOME Terminal**, cada uno con su propio script Bash, variables, directorio lógico de proyectos, colores y configuración Git:
+
+| Perfil | Contexto | Git | Proyectos |
+|---|---|---|---|
+| LOCAL | `WORK_ENV=local` | Configuración habitual de GitHub | `~/Projects` |
+| FJK | `WORK_ENV=fjk` | `~/.config/git/fjk.gitconfig` y Forgejo vía HTTPS + libsecret | `/almacenamiento/Projects` |
+
+El archivo `starship-thinkpad.toml` muestra `[LOCAL]` o `[FJK]` si existe `WORK_ENV`. La identidad visual, la rama Git y el reloj se conservan. Para instalar los archivos sin sobrescribir los perfiles gráficos existentes:
+
+```bash
+bash gnome-terminal/install.sh --dry-run
+bash gnome-terminal/install.sh --apply
+```
+
+Se requiere configurar el comando personalizado de cada perfil gráfico para iniciar el script apropiado. Consulta **[gnome-terminal/README.md](gnome-terminal/README.md)** para la instalación completa, las pruebas y la configuración segura de Forgejo. Nunca guardes credenciales o tokens Git en este repositorio. El instalador clásico `install.sh` continúa manejando los temas **por equipo**; el instalador nuevo es específico de los perfiles GNOME Terminal.
+
 ## Instalación interactiva por equipo
 
 El programa lista los equipos considerados y permite elegir la configuración **del equipo local**, no de uno remoto. Para instalar desde `main` en una ubicación permanente:
