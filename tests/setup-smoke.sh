@@ -41,7 +41,7 @@ test ! -e "$TMP/home-thinkpad/.config"
 test ! -e "$TMP/home-thinkpad/.bashrc"
 
 # INFRA-CORE01: Zsh y configuracion completa sin tocar el usuario real.
-HOME="$TMP/home-infra" bash "$ROOT/setup.sh" --target infra-core01 --shell zsh --mode all --apply > "$TMP/infra.log"
+HOME="$TMP/home-infra" bash "$ROOT/setup.sh" --target infra-core01 --shell zsh --mode all --apply </dev/null > "$TMP/infra.log"
 test -f "$TMP/home-infra/.config/starship.toml"
 test -f "$TMP/home-infra/.config/gnome-terminal/profiles/fjk.bashrc"
 test -f "$TMP/home-infra/.config/git/fjk.gitconfig"
@@ -51,11 +51,11 @@ grep -Fq '${custom.work_env}' "$TMP/home-infra/.config/starship.toml"
 test ! -f "$TMP/home-infra/.bashrc"
 
 # Re-ejecutar no duplica el inicializador Starship.
-HOME="$TMP/home-infra" bash "$ROOT/setup.sh" --target infra-core01 --shell zsh --mode all --apply > "$TMP/infra-second.log"
+HOME="$TMP/home-infra" bash "$ROOT/setup.sh" --target infra-core01 --shell zsh --mode all --apply </dev/null > "$TMP/infra-second.log"
 test "$(grep -Fxc 'eval "$(starship init zsh)"' "$TMP/home-infra/.zshrc")" -eq 1
 
 # Equipo nuevo: la etiqueta visual reemplaza el nombre del equipo base.
-HOME="$TMP/home-new" bash "$ROOT/setup.sh" --target new --theme thinkpad --host-label LAB-01 --shell bash --mode starship --apply > "$TMP/new.log"
+HOME="$TMP/home-new" bash "$ROOT/setup.sh" --target new --theme thinkpad --host-label LAB-01 --shell bash --mode starship --apply </dev/null > "$TMP/new.log"
 grep -Fq '[LAB-01]' "$TMP/home-new/.config/starship.toml"
 grep -Fqx 'eval "$(starship init bash)"' "$TMP/home-new/.bashrc"
 
