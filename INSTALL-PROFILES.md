@@ -1,4 +1,19 @@
-# Instalador interactivo por equipo
+# Instalador transversal y perfiles por equipo
+
+**Recomendado:** usar `bash setup.sh` para detectar el equipo, elegir INFRA-CORE01, THINKPAD o una máquina nueva, seleccionar Starship/perfiles GNOME Terminal/ambos y hacer una simulación antes de aplicar. Admite Bash y Zsh. `install.sh` sigue disponible como alternativa anterior centrada en Bash.
+
+Ejemplos:
+
+```bash
+bash setup.sh                                  # menú, sin cambios por defecto
+bash setup.sh --target infra-core01 --mode all --dry-run
+bash setup.sh --target thinkpad --mode all --apply
+bash setup.sh --target new --theme thinkpad --host-label LAB-01 --mode starship --dry-run
+```
+
+La opción `--apply` requiere una selección explícita; desde una sesión interactiva también solicita confirmación. Los archivos existentes se respaldan. No cambia la shell predeterminada ni instala paquetes automáticamente.
+
+# Instalador anterior (`install.sh`)
 
 Ejecuta el instalador **en el equipo que deseas personalizar**. El menú elige un perfil visual, **no** establece una conexión SSH ni instala remotamente en otras máquinas.
 
