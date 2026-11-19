@@ -31,6 +31,10 @@ chmod +x "$TMP/home-infra/.local/libexec/git-credential-libsecret"
 bash -n "$ROOT/setup.sh"
 bash -n "$ROOT/gnome-terminal/install.sh"
 bash -n "$ROOT/gnome-terminal/configure-profiles.sh"
+# Comprobar que el esquema Custom FJK figura en el instalador (sin D-Bus real).
+grep -Fq "background-color 'rgb(7,59,76)'" "$ROOT/gnome-terminal/configure-profiles.sh"
+grep -Fq "foreground-color 'rgb(220,239,239)'" "$ROOT/gnome-terminal/configure-profiles.sh"
+grep -Fq 'gsettings set "$schema" palette ' "$ROOT/gnome-terminal/configure-profiles.sh"
 bash -n "$ROOT/git/bootstrap-fjk.sh"
 bash -n "$ROOT/gnome-terminal/profiles/local.bashrc"
 bash -n "$ROOT/gnome-terminal/profiles/fjk.bashrc"
@@ -59,4 +63,4 @@ HOME="$TMP/home-new" bash "$ROOT/setup.sh" --target new --theme thinkpad --host-
 grep -Fq '[LAB-01]' "$TMP/home-new/.config/starship.toml"
 grep -Fqx 'eval "$(starship init bash)"' "$TMP/home-new/.bashrc"
 
-echo 'OK: sintaxis, dry-run, INFRA Zsh, Git FJK, idempotencia y equipo nuevo Bash (sin D-Bus real).'
+echo 'OK: sintaxis, dry-run, INFRA Zsh, Git FJK, idempotencia y equipo nuevo Bash y esquema FJK declarado (sin D-Bus real).'
