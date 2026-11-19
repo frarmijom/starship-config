@@ -25,7 +25,7 @@ export PATH="$TMP/bin:$PATH"
 # Nunca usar el D-Bus real durante tests: evita cambios en perfiles del usuario.
 export DBUS_SESSION_BUS_ADDRESS=""
 mkdir -p "$TMP/home-infra/.local/libexec"
-printf '#!/bin/sh\\nexit 0\\n' > "$TMP/home-infra/.local/libexec/git-credential-libsecret"
+printf '#!/bin/sh\nexit 0\n' > "$TMP/home-infra/.local/libexec/git-credential-libsecret"
 chmod +x "$TMP/home-infra/.local/libexec/git-credential-libsecret"
 
 bash -n "$ROOT/setup.sh"
