@@ -13,9 +13,9 @@ La configuración de cada equipo se mantiene independiente. Ambos perfiles utili
 
 Los nombres en mayúsculas son etiquetas visuales estáticas de cada perfil; no renombran el hostname Linux.
 
-## Entornos LOCAL y FJK en GNOME Terminal (ThinkPad)
+## Entornos LOCAL y FJK en GNOME Terminal (equipos compatibles)
 
-El ThinkPad también admite dos perfiles de **GNOME Terminal**, cada uno con su propio script Bash, variables, directorio lógico de proyectos, colores y configuración Git:
+INFRA-CORE01, ThinkPad y otros equipos con GNOME Terminal admiten dos perfiles de **GNOME Terminal**, cada uno con su propio script Bash, variables, directorio lógico de proyectos, colores y configuración Git:
 
 | Perfil | Contexto | Git | Proyectos |
 |---|---|---|---|
@@ -29,7 +29,7 @@ bash gnome-terminal/install.sh --dry-run
 bash gnome-terminal/install.sh --apply
 ```
 
-Se requiere configurar el comando personalizado de cada perfil gráfico para iniciar el script apropiado. Consulta **[gnome-terminal/README.md](gnome-terminal/README.md)** para la instalación completa, las pruebas y la configuración segura de Forgejo. Nunca guardes credenciales o tokens Git en este repositorio. El instalador clásico `install.sh` continúa manejando los temas **por equipo**; el instalador nuevo es específico de los perfiles GNOME Terminal.
+El instalador transversal `setup.sh --mode terminal --apply` configura automáticamente el comando de cada perfil gráfico, reutiliza los perfiles existentes y crea los que falten, con respaldo previo mediante `dconf`. Consulta **[gnome-terminal/README.md](gnome-terminal/README.md)** para la instalación completa, las pruebas y la configuración segura de Forgejo. Nunca guardes credenciales o tokens Git en este repositorio. El instalador clásico `install.sh` continúa manejando los temas **por equipo**; el instalador nuevo es específico de los perfiles GNOME Terminal.
 
 ## Instalador transversal recomendado (`setup.sh`)
 
@@ -53,7 +53,7 @@ bash setup.sh --target infra-core01 --mode all --apply
 bash setup.sh --target new --theme thinkpad --host-label LAB-01 --mode starship --dry-run
 ```
 
-**Seguridad y compatibilidad:** utiliza `~/.bashrc` para Bash o `~/.zshrc` para Zsh, respalda los archivos que reemplaza y no modifica las credenciales Git. Cuando se pide `all` y no existe GNOME Terminal, informa y omite esa parte; no instala paquetes sin permiso. Los archivos Bash de GNOME Terminal se respaldan y copian, pero el registro de los perfiles gráficos se realiza desde su interfaz, según [gnome-terminal/README.md](gnome-terminal/README.md). No migra repositorios ni crea los directorios `Projects`.
+**Seguridad y compatibilidad:** utiliza `~/.bashrc` para Bash o `~/.zshrc` para Zsh, respalda los archivos que reemplaza y no modifica las credenciales Git. Cuando se pide `all` y no existe GNOME Terminal, informa y omite esa parte; no instala paquetes sin permiso. Los archivos Bash se respaldan y copian. Además, prepara `~/.config/git/fjk.gitconfig`, busca o compila el helper libsecret si están disponibles sus dependencias y registra los perfiles gráficos LOCAL/FJK con respaldo `dconf` cuando hay una sesión D-Bus. Si no hay sesión gráfica, indica que se omite esa parte; no instala paquetes ni crea credenciales. No migra repositorios ni crea los directorios `Projects`.
 
 `install.sh` permanece como **instalador anterior**, para compatibilidad; presupone Bash y configura únicamente los temas por equipo. Para nuevos usos, prefiere `setup.sh`.
 
