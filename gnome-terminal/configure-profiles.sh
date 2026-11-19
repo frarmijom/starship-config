@@ -73,8 +73,21 @@ for label in LOCAL FJK; do
       gsettings set "$schema" background-color 'rgb(30,30,46)'
       gsettings set "$schema" foreground-color 'rgb(205,214,244)'
     else
-      gsettings set "$schema" background-color 'rgb(253,246,227)'
-      gsettings set "$schema" foreground-color 'rgb(101,123,131)'
+      # FJK Deep Teal: esquema Custom solo para perfiles FJK nuevos.
+      # Un perfil FJK existente conserva su paleta personalizada.
+      gsettings set "$schema" background-color 'rgb(7,59,76)'
+      gsettings set "$schema" foreground-color 'rgb(220,239,239)'
+      gsettings set "$schema" bold-color-same-as-fg true
+      gsettings set "$schema" palette "[
+        'rgb(12,32,42)', 'rgb(255,107,107)',
+        'rgb(125,255,138)', 'rgb(255,209,102)',
+        'rgb(100,181,246)', 'rgb(199,146,234)',
+        'rgb(117,230,218)', 'rgb(220,239,239)',
+        'rgb(90,125,135)', 'rgb(255,140,140)',
+        'rgb(160,255,174)', 'rgb(255,222,140)',
+        'rgb(137,205,255)', 'rgb(220,178,255)',
+        'rgb(150,255,240)', 'rgb(255,255,255)'
+      ]"
     fi
     ids+=("$uuid")
     # Construir la lista GVariant sin alterar orden, perfil default ni IDs existentes.
