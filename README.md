@@ -1,6 +1,6 @@
 # Starship Config — perfiles de terminal Debian
 
-Configuraciones para **INFRA-CORE01** y **ThinkPad**. Bash + Starship, prompt de dos líneas, contexto Git y reloj local alineado a la derecha.
+Configuraciones reutilizables para **INFRA-CORE01**, **ThinkPad** y **equipos nuevos**. Bash + Starship, prompt de dos líneas, contexto Git y reloj local alineado a la derecha.
 
 ## Perfiles existentes
 
@@ -22,7 +22,7 @@ El ThinkPad también admite dos perfiles de **GNOME Terminal**, cada uno con su 
 | LOCAL | `WORK_ENV=local` | Configuración habitual de GitHub | `~/Projects` |
 | FJK | `WORK_ENV=fjk` | `~/.config/git/fjk.gitconfig` y Forgejo vía HTTPS + libsecret | `/almacenamiento/Projects` |
 
-El archivo `starship-thinkpad.toml` muestra `[LOCAL]` o `[FJK]` si existe `WORK_ENV`. La identidad visual, la rama Git y el reloj se conservan. Para instalar los archivos sin sobrescribir los perfiles gráficos existentes:
+Los temas de ambos equipos muestran `[LOCAL]` o `[FJK]` si existe `WORK_ENV`. La identidad visual, la rama Git y el reloj se conservan. Para instalar los archivos sin sobrescribir los perfiles gráficos existentes:
 
 ```bash
 bash gnome-terminal/install.sh --dry-run
@@ -31,7 +31,33 @@ bash gnome-terminal/install.sh --apply
 
 Se requiere configurar el comando personalizado de cada perfil gráfico para iniciar el script apropiado. Consulta **[gnome-terminal/README.md](gnome-terminal/README.md)** para la instalación completa, las pruebas y la configuración segura de Forgejo. Nunca guardes credenciales o tokens Git en este repositorio. El instalador clásico `install.sh` continúa manejando los temas **por equipo**; el instalador nuevo es específico de los perfiles GNOME Terminal.
 
-## Instalación interactiva por equipo
+## Instalador transversal recomendado (`setup.sh`)
+
+Este es el punto de entrada para configurar Starship y, **si GNOME Terminal está instalado**, los perfiles de trabajo LOCAL/FJK. Detecta el hostname real y la shell de inicio del usuario (Bash o Zsh); permite elegir una máquina conocida o **Equipo nuevo**, definir tema y etiqueta visual, y elegir si aplicar Starship, los perfiles GNOME Terminal o ambos.
+
+```bash
+bash -n setup.sh
+bash setup.sh
+```
+
+El menú es interactivo si se ejecuta desde una terminal. **Por defecto simula, no cambia archivos.** Para usarlo sin menú:
+
+```bash
+# Ejemplo para revisar INFRA-CORE01, con shell detectada automáticamente:
+bash setup.sh --target infra-core01 --mode all --dry-run
+
+# Solo cuando ya se revisó el plan:
+bash setup.sh --target infra-core01 --mode all --apply
+
+# Nuevo equipo con identidad visual propia:
+bash setup.sh --target new --theme thinkpad --host-label LAB-01 --mode starship --dry-run
+```
+
+**Seguridad y compatibilidad:** utiliza `~/.bashrc` para Bash o `~/.zshrc` para Zsh, respalda los archivos que reemplaza y no modifica las credenciales Git. Cuando se pide `all` y no existe GNOME Terminal, informa y omite esa parte; no instala paquetes sin permiso. Los archivos Bash de GNOME Terminal se respaldan y copian, pero el registro de los perfiles gráficos se realiza desde su interfaz, según [gnome-terminal/README.md](gnome-terminal/README.md). No migra repositorios ni crea los directorios `Projects`.
+
+`install.sh` permanece como **instalador anterior**, para compatibilidad; presupone Bash y configura únicamente los temas por equipo. Para nuevos usos, prefiere `setup.sh`.
+
+## Instalación interactiva por equipo (anterior)
 
 El programa lista los equipos considerados y permite elegir la configuración **del equipo local**, no de uno remoto. Para instalar desde `main` en una ubicación permanente:
 
@@ -73,7 +99,10 @@ El instalador registra el cargador de aliases cuando encuentra `bash/load.sh`, i
 starship-config/
 ├── starship.toml            # 👽 INFRA-CORE01
 ├── starship-thinkpad.toml   # 💀 ThinkPad
-├── install.sh               # selector interactivo
+├── setup.sh                 # instalador transversal (Bash y Zsh, nueva máquina)
+├── gnome-terminal/           # scripts LOCAL/FJK e instalador de perfiles
+├── git/                      # ejemplo de configuración Forgejo sin secretos
+├── install.sh               # selector anterior (Bash)
 ├── INSTALL-PROFILES.md
 ├── bash/
 │   ├── aliases-common.sh
