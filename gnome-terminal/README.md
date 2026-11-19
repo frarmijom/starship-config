@@ -1,4 +1,4 @@
-# Perfiles LOCAL y FJK — GNOME Terminal (ThinkPad)
+# Perfiles LOCAL y FJK — GNOME Terminal (transversal)
 
 Esta configuración reproduce los perfiles que se validaron el **18-11-2026** en Debian 13 con GNOME Terminal 3.56.2, Bash y Starship. No cambia la shell del equipo, no configura otros hosts por SSH y no guarda claves ni tokens.
 
@@ -7,7 +7,18 @@ Esta configuración reproduce los perfiles que se validaron el **18-11-2026** en
 | LOCAL | `local` | `$HOME/Projects` | Git global normal `~/.gitconfig` | Fondo oscuro |
 | FJK | `fjk` | `/almacenamiento/Projects` | `~/.config/git/fjk.gitconfig` | Solarized Light |
 
-## Instalar archivos Bash
+## Instalacion completa desde el menu
+
+```bash
+bash setup.sh --mode terminal --dry-run
+bash setup.sh --mode terminal --apply
+```
+
+El instalador copia los archivos Bash, crea `~/.config/git/fjk.gitconfig` si falta, prepara el helper libsecret si esta disponible o compilable sin instalar paquetes, y configura perfiles graficos `LOCAL` y `FJK` por nombre. Conserva los demas perfiles, su perfil predeterminado y sus colores. Hace un respaldo `dconf` antes de escribir los ajustes graficos. Si no hay sesion D-Bus, omite la configuracion grafica y permite terminar la parte de archivos.
+
+La identidad Git del usuario no se inventa: si falta o es un correo de ejemplo, se advierte para configurarla. Los secretos solo se introducen al autenticar con Forgejo, nunca se guardan en el repositorio.
+
+## Instalar solamente archivos Bash (opcion anterior)
 
 Desde la raíz del repositorio, sin `sudo`:
 
@@ -16,7 +27,7 @@ bash gnome-terminal/install.sh --dry-run
 bash gnome-terminal/install.sh --apply
 ```
 
-El instalador respalda los archivos que ya existan, no toca los perfiles gráficos de GNOME Terminal, ni `~/.bashrc`, ni `~/.gitconfig`, ni el llavero.
+Este instalador auxiliar solo respalda y copia archivos; el punto de entrada recomendado para realizar todo el proceso es `setup.sh`. No toca `~/.bashrc`, `~/.gitconfig` ni el llavero.
 
 ## Configurar perfiles gráficos existentes
 
