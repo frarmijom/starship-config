@@ -11,9 +11,16 @@ printf '#!/bin/sh\nexit 0\n' > "$TMP/bin/starship"
 printf '#!/bin/sh\nexit 0\n' > "$TMP/bin/gnome-terminal"
 chmod +x "$TMP/bin/starship" "$TMP/bin/gnome-terminal"
 export PATH="$TMP/bin:$PATH"
+# Nunca usar el D-Bus real durante tests: evita cambios en perfiles del usuario.
+export DBUS_SESSION_BUS_ADDRESS=""
+mkdir -p "$TMP/home-infra/.local/libexec"
+printf '#!/bin/sh\\nexit 0\\n' > "$TMP/home-infra/.local/libexec/git-credential-libsecret"
+chmod +x "$TMP/home-infra/.local/libexec/git-credential-libsecret"
 
 bash -n "$ROOT/setup.sh"
 bash -n "$ROOT/gnome-terminal/install.sh"
+bash -n "$ROOT/gnome-terminal/configure-profiles.sh"
+bash -n "$ROOT/git/bootstrap-fjk.sh"
 bash -n "$ROOT/gnome-terminal/profiles/local.bashrc"
 bash -n "$ROOT/gnome-terminal/profiles/fjk.bashrc"
 
@@ -26,6 +33,8 @@ test ! -e "$TMP/home-thinkpad/.bashrc"
 HOME="$TMP/home-infra" bash "$ROOT/setup.sh" --target infra-core01 --shell zsh --mode all --apply > "$TMP/infra.log"
 test -f "$TMP/home-infra/.config/starship.toml"
 test -f "$TMP/home-infra/.config/gnome-terminal/profiles/fjk.bashrc"
+test -f "$TMP/home-infra/.config/git/fjk.gitconfig"
+grep -Fq "git-credential-libsecret" "$TMP/home-infra/.config/git/fjk.gitconfig"
 grep -Fqx 'eval "$(starship init zsh)"' "$TMP/home-infra/.zshrc"
 grep -Fq '${custom.work_env}' "$TMP/home-infra/.config/starship.toml"
 test ! -f "$TMP/home-infra/.bashrc"
@@ -39,4 +48,4 @@ HOME="$TMP/home-new" bash "$ROOT/setup.sh" --target new --theme thinkpad --host-
 grep -Fq '[LAB-01]' "$TMP/home-new/.config/starship.toml"
 grep -Fqx 'eval "$(starship init bash)"' "$TMP/home-new/.bashrc"
 
-echo 'OK: sintaxis, simulacion sin cambios, INFRA Zsh, idempotencia y equipo nuevo Bash.'
+echo 'OK: sintaxis, dry-run, INFRA Zsh, Git FJK, idempotencia y equipo nuevo Bash (sin D-Bus real).'
