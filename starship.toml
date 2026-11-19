@@ -1,6 +1,7 @@
 format = """
 $username\
 $hostname\
+${custom.work_env}\
 $directory\
 $git_branch\
 $git_status\
@@ -70,3 +71,10 @@ style = "bold #7F849C"
 
 [fill]
 symbol = " "
+
+# Contexto opcional del perfil LOCAL / FJK, disponible en cualquier equipo
+[custom.work_env]
+when = 'test -n "$WORK_ENV"'
+command = 'printf "%s" "$WORK_ENV" | tr "[:lower:]" "[:upper:]"'
+format = '[\[$output\]]($style) '
+style = 'bold #C3E88D'
