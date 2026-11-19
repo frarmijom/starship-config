@@ -162,9 +162,15 @@ if ((do_starship)); then
 fi
 if ((do_terminal)); then
   printf 'Perfiles: %s/gnome-terminal/profiles/{local,fjk}.bashrc -> ~/.config/gnome-terminal/profiles/\n' "$ROOT"
-  echo 'Perfiles graficos de GNOME Terminal: se conservan; configuracion manual indicada al terminar.'
+  echo 'Perfiles graficos: configurar LOCAL/FJK sin duplicados; respaldo dconf previo.'
+  echo 'Git FJK: preparar archivo separado y helper libsecret si hay dependencias.'
 fi
 if (( !APPLY )); then
+  if ((do_terminal)); then
+    bash "$ROOT/gnome-terminal/install.sh" --dry-run
+    bash "$ROOT/git/bootstrap-fjk.sh" --dry-run
+    bash "$ROOT/gnome-terminal/configure-profiles.sh" --dry-run
+  fi
   echo 'Simulacion completa; ningun archivo modificado. Usa --apply para aplicar.'
   exit 0
 fi
@@ -212,5 +218,7 @@ fi
 
 if ((do_terminal)); then
   bash "$ROOT/gnome-terminal/install.sh" --apply
+  bash "$ROOT/git/bootstrap-fjk.sh" --apply
+  bash "$ROOT/gnome-terminal/configure-profiles.sh" --apply
 fi
 echo 'Instalacion completada. Abre una terminal nueva para validar.'
