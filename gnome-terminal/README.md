@@ -5,7 +5,7 @@ Esta configuración reproduce los perfiles que se validaron el **18-11-2026** en
 | Perfil | `WORK_ENV` | `PROJECTS_HOME` | Configuración Git | Apariencia sugerida |
 |---|---|---|---|---|
 | LOCAL | `local` | `$HOME/Projects` | Git global normal `~/.gitconfig` | Fondo oscuro |
-| FJK | `fjk` | `/almacenamiento/Projects` | `~/.config/git/fjk.gitconfig` | Solarized Light |
+| FJK | `fjk` | `/almacenamiento/Projects` | `~/.config/git/fjk.gitconfig` | **FJK Deep Teal (Custom)** |
 
 ## Instalacion completa desde el menu
 
@@ -14,7 +14,7 @@ bash setup.sh --mode terminal --dry-run
 bash setup.sh --mode terminal --apply
 ```
 
-El instalador copia los archivos Bash, crea `~/.config/git/fjk.gitconfig` si falta, prepara el helper libsecret si esta disponible o compilable sin instalar paquetes, y configura perfiles graficos `LOCAL` y `FJK` por nombre. Conserva los demas perfiles, su perfil predeterminado y sus colores. Hace un respaldo `dconf` antes de escribir los ajustes graficos. Si no hay sesion D-Bus, omite la configuracion grafica y permite terminar la parte de archivos.
+El instalador copia los archivos Bash, crea `~/.config/git/fjk.gitconfig` si falta, prepara el helper libsecret si esta disponible o compilable sin instalar paquetes, y configura perfiles graficos `LOCAL` y `FJK` por nombre. Conserva los demas perfiles, su perfil predeterminado y sus colores. Hace un respaldo `dconf` antes de escribir los ajustes graficos. Los perfiles FJK nuevos reciben el esquema Custom **FJK Deep Teal** con fondo `rgb(7,59,76)`, texto `rgb(220,239,239)` y paleta ANSI de 16 colores. Los perfiles FJK existentes conservan su paleta personalizada; LOCAL mantiene sus propios colores. Si no hay sesion D-Bus, omite la configuracion grafica y permite terminar la parte de archivos.
 
 La identidad Git del usuario no se inventa: si falta o es un correo de ejemplo, se advierte para configurarla. Los secretos solo se introducen al autenticar con Forgejo, nunca se guardan en el repositorio.
 
