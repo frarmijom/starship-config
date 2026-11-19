@@ -4,6 +4,17 @@ set -euo pipefail
 
 ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP="$(mktemp -d)"
+on_error() {
+  local status="$?" line="${BASH_LINENO[0]:-unknown}"
+  printf '\nERROR: setup-smoke.sh fallo en linea %s (exit %s).\n' "$line" "$status" >&2
+  for log in "$TMP"/*.log; do
+    [[ -f "$log" ]] || continue
+    printf '\n=== %s ===\n' "${log##*/}" >&2
+    cat "$log" >&2
+  done
+  exit "$status"
+}
+trap on_error ERR
 trap 'rm -rf -- "$TMP"' EXIT
 
 mkdir -p "$TMP/bin" "$TMP/home-infra" "$TMP/home-new" "$TMP/home-thinkpad"
